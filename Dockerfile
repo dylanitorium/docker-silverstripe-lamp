@@ -23,7 +23,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update && \
     apt-get dist-upgrade -y && \
     apt-get -qqy install apache2 \
-    mysql-server \
+    mysql-client \
     php7.0 \
     php7.0-cli \
     libapache2-mod-php7.0 \
