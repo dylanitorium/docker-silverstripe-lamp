@@ -53,8 +53,6 @@ RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 	wget https://getcomposer.org/composer.phar && \
 	chmod +x composer.phar && \
 	mv composer.phar /usr/local/bin/composer && \
-	pear channel-discover https://pear.phing.info && \
-	pear install phing/phing && \
 	curl -sS https://silverstripe.github.io/sspak/install | php -- /usr/local/bin
 
 # SilverStripe Apache Configuration
