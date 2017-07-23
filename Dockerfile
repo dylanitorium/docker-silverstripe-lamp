@@ -44,7 +44,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
     php7.0-cli \
     php7.0-dev \
     php-pear \
-    libsasl2-dev
+    libsasl2-dev \
+    sendmail
 
 #  - Phpunit, Composer, Phing, SSPak
 RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
@@ -78,7 +79,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
 	npm install -g grunt-cli gulp bower
 
 ####
-## Commands and ports	
+## Commands and ports
 EXPOSE 80
 
 VOLUME /var/www
