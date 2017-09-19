@@ -43,6 +43,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     php7.0-mcrypt \
     php7.0-cli \
     php7.0-dev \
+    php7.0-intl \
     php-pear \
     libsasl2-dev \
     sendmail
