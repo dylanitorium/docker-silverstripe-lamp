@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Sam Minnee <sam@silverstripe.com>
+MAINTAINER Dylan Sweetensen <dylan@sweetdigital.nz>
 
 ### SET UP
 
@@ -65,7 +65,6 @@ RUN a2enmod rewrite && \
 ADD apache-foreground /usr/local/bin/apache-foreground
 ADD apache-default-vhost /etc/apache2/sites-available/000-default.conf
 
-
 ####
 ## These are not specifically SilverStripe related and could be removed on a more optimised image
 
@@ -87,6 +86,6 @@ VOLUME /var/www
 
 # Run apache in foreground mode, because Docker needs a foreground
 WORKDIR /var/www
-CMD ["/usr/local/bin/apache-foreground"]
+CMD ["/usr/local/bin/composer self-update && /usr/local/bin/apache-foreground"]
 
 ENV LANG en_US.UTF-8
