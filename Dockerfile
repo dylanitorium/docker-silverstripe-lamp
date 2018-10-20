@@ -86,6 +86,6 @@ VOLUME /var/www
 
 # Run apache in foreground mode, because Docker needs a foreground
 WORKDIR /var/www
-CMD ["/usr/local/bin/composer self-update && /usr/local/bin/apache-foreground"]
+CMD ["/usr/local/bin/apache-foreground"]
 
 ENV LANG en_US.UTF-8
