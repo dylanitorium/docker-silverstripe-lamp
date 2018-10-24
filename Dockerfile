@@ -78,6 +78,11 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
 	apt-get install -qqy nodejs && \
 	npm install -g grunt-cli gulp bower
 
+# LetsEncrypt 
+RUN echo 'deb http://ftp.debian.org/debian jessie-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
+RUN apt-get update
+RUN apt-get install python-certbot-apache -t jessie-backports
+
 ####
 ## Commands and ports
 EXPOSE 80
