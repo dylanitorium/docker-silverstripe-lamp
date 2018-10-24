@@ -81,7 +81,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
 # LetsEncrypt 
 RUN echo 'deb http://ftp.debian.org/debian jessie-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
 RUN apt-get update
-RUN apt-get install python-certbot-apache -t jessie-backports
+RUN apt-get -qqy install python-certbot-apache -t jessie-backports
 
 ####
 ## Commands and ports
