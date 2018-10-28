@@ -29,25 +29,25 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get dist-upgrade -y && \
     apt-get -qqy install apache2 \
     mysql-client \
-    php7.2 \
-    php7.2-cli \
-    libapache2-mod-php7.2 \
-    php7.2-gd \
-    php7.2-json \
-    php7.2-ldap \
-    php7.2-mbstring \
-    php7.2-mysql \
-    php7.2-pgsql \
-    php7.2-sqlite3 \
-    php7.2-xml \
-    php7.2-xsl \
-    php7.2-zip \
-    php7.2-soap \
-    php7.2-fpm \
-    php7.2-curl \
-    php7.2-cli \
-    php7.2-dev \
-    php7.2-intl \
+    php7.1 \
+    php7.1-cli \
+    libapache2-mod-php7.1 \
+    php7.1-gd \
+    php7.1-json \
+    php7.1-ldap \
+    php7.1-mbstring \
+    php7.1-mysql \
+    php7.1-pgsql \
+    php7.1-sqlite3 \
+    php7.1-xml \
+    php7.1-xsl \
+    php7.1-zip \
+    php7.1-soap \
+    php7.1-fpm \
+    php7.1-curl \
+    php7.1-cli \
+    php7.1-dev \
+    php7.1-intl \
     php-pear \
     libsasl2-dev \
     sendmail
@@ -64,7 +64,7 @@ RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 # SilverStripe Apache Configuration
 RUN a2enmod rewrite && \
 	rm -r /var/www/html && \
-	echo "date.timezone = Pacific/Auckland" >> /etc/php/7.2/fpm/php.ini
+	echo "date.timezone = Pacific/Auckland" >> /etc/php/7.1/fpm/php.ini
 
 ADD apache-foreground /usr/local/bin/apache-foreground
 ADD apache-default-vhost /etc/apache2/sites-available/000-default.conf
