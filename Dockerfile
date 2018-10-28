@@ -5,7 +5,7 @@ MAINTAINER Dylan Sweetensen <dylan@sweetdigital.nz>
 
 RUN apt-get -qq update
 
-RUN apt-get -qqy install sudo wget lynx telnet nano curl make git-core locales bzip2
+RUN apt-get -qqy install sudo wget lynx telnet nano curl make git-core locales bzip2 
 
 RUN echo "LANG=en_US.UTF-8\n" > /etc/default/locale && \
 	echo "en_US.UTF-8 UTF-8\n" > /etc/locale.gen && \
@@ -18,32 +18,36 @@ RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
     wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
+
 # APACHE, MYSQL, PHP & SUPPORT TOOLS
+RUN apt-get -y install apt-transport-https lsb-release ca-certificates
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update && \
     apt-get dist-upgrade -y && \
     apt-get -qqy install apache2 \
     mysql-client \
-    php7.0 \
-    php7.0-cli \
-    libapache2-mod-php7.0 \
-    php7.0-gd \
-    php7.0-json \
-    php7.0-ldap \
-    php7.0-mbstring \
-    php7.0-mysql \
-    php7.0-pgsql \
-    php7.0-sqlite3 \
-    php7.0-xml \
-    php7.0-xsl \
-    php7.0-zip \
-    php7.0-soap \
-    php7.0-fpm \
-    php7.0-curl \
-    php7.0-mcrypt \
-    php7.0-cli \
-    php7.0-dev \
-    php7.0-intl \
+    php7.2 \
+    php7.2-cli \
+    libapache2-mod-php7.2 \
+    php7.2-gd \
+    php7.2-json \
+    php7.2-ldap \
+    php7.2-mbstring \
+    php7.2-mysql \
+    php7.2-pgsql \
+    php7.2-sqlite3 \
+    php7.2-xml \
+    php7.2-xsl \
+    php7.2-zip \
+    php7.2-soap \
+    php7.2-fpm \
+    php7.2-curl \
+    php7.2-cli \
+    php7.2-dev \
+    php7.2-intl \
     php-pear \
     libsasl2-dev \
     sendmail
@@ -60,7 +64,7 @@ RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 # SilverStripe Apache Configuration
 RUN a2enmod rewrite && \
 	rm -r /var/www/html && \
-	echo "date.timezone = Pacific/Auckland" >> /etc/php/7.0/fpm/php.ini
+	echo "date.timezone = Pacific/Auckland" >> /etc/php/7.2/fpm/php.ini
 
 ADD apache-foreground /usr/local/bin/apache-foreground
 ADD apache-default-vhost /etc/apache2/sites-available/000-default.conf
