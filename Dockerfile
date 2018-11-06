@@ -1,8 +1,7 @@
 FROM debian:jessie
 MAINTAINER Dylan Sweetensen <dylan@sweetdigital.nz>
 
-### SET UP
-
+# SET UP
 RUN apt-get -qq update
 
 RUN apt-get -qqy install sudo wget lynx telnet nano curl make git-core locales bzip2 
@@ -11,7 +10,7 @@ RUN echo "LANG=en_US.UTF-8\n" > /etc/default/locale && \
 	echo "en_US.UTF-8 UTF-8\n" > /etc/locale.gen && \
 	locale-gen
 
-# Known hosts
+# KNOWN HOSTS
 ADD known_hosts /root/.ssh/known_hosts
 
 RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
@@ -52,7 +51,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     libsasl2-dev \
     sendmail
 
-#  - Phpunit, Composer, Phing, SSPak
+#  Phpunit, Composer, Phing, SSPak
 RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 	chmod +x phpunit-3.7.37.phar && \
 	mv phpunit-3.7.37.phar /usr/local/bin/phpunit && \
@@ -64,23 +63,20 @@ RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 # SilverStripe Apache Configuration
 RUN a2enmod rewrite && \
 	rm -r /var/www/html && \
-	echo "date.timezone = Pacific/Auckland" >> /etc/php/7.1/fpm/php.ini
+    echo "date.timezone = Pacific/Auckland" >> /etc/php/7.1/apache2/php.ini
 
 ADD apache-foreground /usr/local/bin/apache-foreground
 ADD apache-default-vhost /etc/apache2/sites-available/000-default.conf
 
-####
 ## These are not specifically SilverStripe related and could be removed on a more optimised image
 
-# Ruby, RubyGems, Bundler
-RUN apt-get -qqy install ruby ruby-dev gcc && \
-	gem install bundler && \
-	gem install compass
-
 # NodeJS and common global NPM modules
+
+# Update to node 8
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
-	apt-get install -qqy nodejs && \
-	npm install -g grunt-cli gulp bower
+	apt-get install -qqy nodejs
+
+# Install yarn
 
 # LetsEncrypt 
 RUN echo 'deb http://ftp.debian.org/debian jessie-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
