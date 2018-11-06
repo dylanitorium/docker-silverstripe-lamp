@@ -83,6 +83,10 @@ RUN echo 'deb http://ftp.debian.org/debian jessie-backports main' | sudo tee /et
 RUN apt-get update
 RUN apt-get -qqy install python-certbot-apache -t jessie-backports
 
+# SilverStripe Upgrader
+RUN composer global require silverstripe/upgrader && \
+    echo 'export PATH=$PATH:/root/.composer/vendor/bin/' >> /root/.bash_profile
+
 ####
 ## Commands and ports
 EXPOSE 80
