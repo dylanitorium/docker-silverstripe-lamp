@@ -52,14 +52,13 @@ RUN DEBIAN_FRONTEND=noninteractive \
     libsasl2-dev \
     sendmail
 
-#  - Phpunit, Composer, Phing, SSPak
+#  - Phpunit, Composer
 RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 	chmod +x phpunit-3.7.37.phar && \
 	mv phpunit-3.7.37.phar /usr/local/bin/phpunit && \
 	wget https://getcomposer.org/composer.phar && \
 	chmod +x composer.phar && \
-	mv composer.phar /usr/local/bin/composer && \
-	curl -sS https://silverstripe.github.io/sspak/install | php -- /usr/local/bin
+	mv composer.phar /usr/local/bin/composer
 
 # SilverStripe Apache Configuration
 RUN a2enmod rewrite && \
@@ -72,15 +71,9 @@ ADD apache-default-vhost /etc/apache2/sites-available/000-default.conf
 ####
 ## These are not specifically SilverStripe related and could be removed on a more optimised image
 
-# Ruby, RubyGems, Bundler
-RUN apt-get -qqy install ruby ruby-dev gcc && \
-	gem install bundler && \
-	gem install compass
-
 # NodeJS and common global NPM modules
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
-	apt-get install -qqy nodejs && \
-	npm install -g grunt-cli gulp bower
+	apt-get install -qqy nodejs
 
 # LetsEncrypt 
 RUN echo 'deb http://ftp.debian.org/debian jessie-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
