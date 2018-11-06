@@ -51,11 +51,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     libsasl2-dev \
     sendmail
 
-<<<<<<< HEAD
-#  - Phpunit, Composer
-=======
 #  Phpunit, Composer, Phing, SSPak
->>>>>>> 0797271fb3396ae82d77fe6a02d981625d19ec68
 RUN wget https://phar.phpunit.de/phpunit-3.7.37.phar && \
 	chmod +x phpunit-3.7.37.phar && \
 	mv phpunit-3.7.37.phar /usr/local/bin/phpunit && \
@@ -76,10 +72,11 @@ ADD apache-default-vhost /etc/apache2/sites-available/000-default.conf
 # NodeJS and common global NPM modules
 
 # Update to node 8
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
-	apt-get install -qqy nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get install -y nodejs
 
 # Install yarn
+RUN npm install -g yarn
 
 # LetsEncrypt 
 RUN echo 'deb http://ftp.debian.org/debian jessie-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
