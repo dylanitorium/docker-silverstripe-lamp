@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Dylan Sweetensen <dylan@sweetdigital.nz>
 
 # SET UP
