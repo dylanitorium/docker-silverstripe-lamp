@@ -13,8 +13,8 @@ RUN echo "LANG=en_US.UTF-8\n" > /etc/default/locale && \
 # KNOWN HOSTS
 ADD known_hosts /root/.ssh/known_hosts
 
-RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
-    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
+RUN echo "deb http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
+    echo "deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
     wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 
